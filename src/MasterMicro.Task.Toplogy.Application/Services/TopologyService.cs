@@ -40,21 +40,27 @@ namespace MasterMicro.Task.Toplogy.Application.Services
         public async Task<TopologyModel> ReadTopologyFromJson(string filePath)
         {
             var topologyToRead = await _topologiesRepo.GetByJsonFileName(filePath);
-            _inMemmoryTopologies.Add(topologyToRead);
+            
+            if(topologyToRead!=null)
+                _inMemmoryTopologies.Add(topologyToRead);
             return topologyToRead;
         }
 
         public void RemoveTopology(string topologyId)
         {
             var topologyToRemove = _inMemmoryTopologies.Where(x => x.Id == topologyId).FirstOrDefault();
-            _inMemmoryTopologies.Remove(topologyToRemove);
+            
+            if(topologyToRemove!=null)
+                _inMemmoryTopologies.Remove(topologyToRemove);
         }
 
         public async Task<TopologyModel> SaveTopologyToJson(string topologyId)
         {
             var topologyToSave = _inMemmoryTopologies.Where(x => x.Id == topologyId).FirstOrDefault();
             
-            topologyToSave = await _topologiesRepo.SaveToJsonFile(topologyToSave, CreateJsonFileName());
+            if(topologyToSave!=null)
+                topologyToSave = await _topologiesRepo.SaveToJsonFile(topologyToSave, CreateJsonFileName());
+            
             return topologyToSave;
         }
 

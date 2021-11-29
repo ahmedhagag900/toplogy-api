@@ -1,3 +1,4 @@
+using MasterMicro.Task.Toplogy.Application.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace MasterMicro.Task.Toplogy.API
         {
 
             services.AddControllers();
+            services.ConfigureTopologyDependency();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MasterMicro.Task.Toplogy.API", Version = "v1" });

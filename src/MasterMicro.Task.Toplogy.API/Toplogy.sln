@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterMicro.Task.Toplogy.API", "MasterMicro.Task.Toplogy.API.csproj", "{FE244702-11E3-4CFD-8511-808B909EF32C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterMicro.Task.Toplogy.API", "MasterMicro.Task.Toplogy.API.csproj", "{FE244702-11E3-4CFD-8511-808B909EF32C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterMicro.Task.Toplogy.Application", "..\MasterMicro.Task.Toplogy.Application\MasterMicro.Task.Toplogy.Application.csproj", "{81875552-9B31-4BA1-A75F-E2EA5C32C486}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterMicro.Task.Toplogy.Application", "..\MasterMicro.Task.Toplogy.Application\MasterMicro.Task.Toplogy.Application.csproj", "{81875552-9B31-4BA1-A75F-E2EA5C32C486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterMicro.Task.Topology.Test", "..\MasterMicro.Task.Topology.Test\MasterMicro.Task.Topology.Test.csproj", "{FB9C3F21-0C2B-406D-83A7-FA66165756DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{81875552-9B31-4BA1-A75F-E2EA5C32C486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81875552-9B31-4BA1-A75F-E2EA5C32C486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81875552-9B31-4BA1-A75F-E2EA5C32C486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9C3F21-0C2B-406D-83A7-FA66165756DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9C3F21-0C2B-406D-83A7-FA66165756DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9C3F21-0C2B-406D-83A7-FA66165756DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9C3F21-0C2B-406D-83A7-FA66165756DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

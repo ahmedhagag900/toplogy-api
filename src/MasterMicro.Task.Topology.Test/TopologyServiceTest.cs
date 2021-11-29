@@ -1,9 +1,11 @@
 using MasterMicro.Task.Toplogy.Application.Interfaces;
 using System;
 using System.IO;
+using System.Linq;
 using Xunit;
 namespace MasterMicro.Task.Topology.Test
 {
+    [Collection("Seq")]
     public class TopologyServiceTest
     {
         private readonly ITopologyService _topologyService;
@@ -32,29 +34,40 @@ namespace MasterMicro.Task.Topology.Test
         }
 
         [Fact]
-        public void ShouldWriteToJsonFile()
-        {
-            throw new NotImplementedException();
-        }
-        public void ShouldGetSpecficTopology()
+        public async System.Threading.Tasks.Task ShouldWriteToJsonFile()
         {
 
-            throw new NotImplementedException();
+            var fileName = "topology.json";
+            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
+            var path = parentDir + "\\" + fileName;
+            var top=await _topologyService.ReadTopologyFromJson(path);
+            var topToWrite = await _topologyService.SaveTopologyToJson(top.Id);
+            Assert.NotNull(topToWrite);
         }
-        public void ShouldGetDevicesOnToplogy()
+
+        [Fact]
+        public async System.Threading.Tasks.Task ShouldGetDevicesOnTopology()
         {
 
-            throw new NotImplementedException();
+            var fileName = "topology.json";
+            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
+            var path = parentDir + "\\" + fileName;
+            var top1 = await _topologyService.ReadTopologyFromJson(path);
+            var devices = _topologyService.GetDevices(top1.Id);
+            Assert.NotNull(devices);
         }
-        public void ShouldRemoveToplogyFromMemmory()
+
+
+        [Fact]
+        public async System.Threading.Tasks.Task ShouldGetDevicesOnToplogyWithNetList()
         {
 
-            throw new NotImplementedException();
-        }
-        public void ShouldGetDevicesOnToplogyWithNetList()
-        {
-
-            throw new NotImplementedException();
+            var fileName = "topology.json";
+            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
+            var path = parentDir + "\\" + fileName;
+            var top1 = await _topologyService.ReadTopologyFromJson(path);
+            var device = _topologyService.GetDevices(top1.Id, top1.Components?.Select(x => x.Netlist?.Id).FirstOrDefault());
+            Assert.NotNull(device);
         }
 
     }

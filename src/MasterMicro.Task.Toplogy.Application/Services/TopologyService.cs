@@ -70,7 +70,7 @@ namespace MasterMicro.Task.Toplogy.Application.Services
 
         private string CreateJsonFileName()
         {
-            var fileName = new Guid().ToString() + ".json";
+            var fileName =  Guid.NewGuid().ToString() + ".json";
             return fileName;
         }
     }

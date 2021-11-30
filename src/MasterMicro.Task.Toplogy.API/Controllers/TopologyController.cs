@@ -39,7 +39,7 @@ namespace MasterMicro.Task.Toplogy.API.Controllers
         }
         [HttpPut]
         [Route("{topId}")]
-        [ProducesResponseType(typeof(TopologyModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> SaveTopology([FromRoute]string topId)
         {
             var topology = await _topologyService.SaveTopologyToJson(topId);

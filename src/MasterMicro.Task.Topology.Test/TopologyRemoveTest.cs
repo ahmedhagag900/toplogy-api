@@ -21,8 +21,7 @@ namespace MasterMicro.Task.Topology.Test
         {
 
             var fileName = "topology.json";
-            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
-            var path = parentDir + "\\" + fileName;
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             var top1 = await _topologyService.ReadTopologyFromJson(path);
             _topologyService.RemoveTopology(top1.Id);
             var top2 = _topologyService.GetAllTopologies().Where(x => x.Id == top1.Id).FirstOrDefault();

@@ -1,3 +1,4 @@
+using MasterMicro.Task.Toplogy.API.Midlewares;
 using MasterMicro.Task.Toplogy.Application.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace MasterMicro.Task.Toplogy.API
         {
 
             services.AddControllers();
+            
             services.ConfigureTopologyDependency();
             services.AddSwaggerGen(c =>
             {
@@ -45,6 +47,7 @@ namespace MasterMicro.Task.Toplogy.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MasterMicro.Task.Toplogy.API v1"));
             }
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();

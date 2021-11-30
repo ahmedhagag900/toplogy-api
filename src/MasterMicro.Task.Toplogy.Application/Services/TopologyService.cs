@@ -3,6 +3,7 @@ using MasterMicro.Task.Toplogy.Application.Models;
 using MasterMicro.Task.Toplogy.Application.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,14 +55,17 @@ namespace MasterMicro.Task.Toplogy.Application.Services
                 _inMemmoryTopologies.Remove(topologyToRemove);
         }
 
-        public async Task<TopologyModel> SaveTopologyToJson(string topologyId)
+        public async Task<string> SaveTopologyToJson(string topologyId)
         {
             var topologyToSave = _inMemmoryTopologies.Where(x => x.Id == topologyId).FirstOrDefault();
-            
-            if(topologyToSave!=null)
-                topologyToSave = await _topologiesRepo.SaveToJsonFile(topologyToSave, CreateJsonFileName());
-            
-            return topologyToSave;
+            string fileToSavePath = "";
+            if (topologyToSave != null)
+            {
+                fileToSavePath = AppDomain.CurrentDomain.BaseDirectory;
+                fileToSavePath = Path.Combine(fileToSavePath, CreateJsonFileName());
+                topologyToSave = await _topologiesRepo.SaveToJsonFile(topologyToSave, fileToSavePath);
+            }
+            return fileToSavePath;
         }
 
         private string CreateJsonFileName()

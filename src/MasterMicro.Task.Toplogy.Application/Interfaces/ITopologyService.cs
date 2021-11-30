@@ -18,8 +18,8 @@ namespace MasterMicro.Task.Toplogy.Application.Interfaces
         /// save/write topology to json file
         /// </summary>
         /// <param name="topologyId">topology id to write/save</param>
-        /// <returns>the save topology</returns>
-        Task<TopologyModel> SaveTopologyToJson(string topologyId);
+        /// <returns>path to saved file</returns>
+        Task<string> SaveTopologyToJson(string topologyId);
         /// <summary>
         /// get all topolgies saved in memory
         /// </summary>

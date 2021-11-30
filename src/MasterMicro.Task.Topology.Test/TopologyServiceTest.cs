@@ -18,8 +18,7 @@ namespace MasterMicro.Task.Topology.Test
         public async System.Threading.Tasks.Task  ShouldReadJsonFileAndLoadInMemmory()
         {
             var fileName = "topology.json";
-            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
-            var path = parentDir + "\\" + fileName;
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             var response=await _topologyService.ReadTopologyFromJson(path);
             Assert.NotNull(response);
         }
@@ -28,8 +27,7 @@ namespace MasterMicro.Task.Topology.Test
         public async System.Threading.Tasks.Task ShouldThrowsFileNotFoundException()
         {
             var fileName = "topology.json0";
-            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
-            var path = parentDir + "\\" + fileName;
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             await Assert.ThrowsAsync<FileNotFoundException>(() => _topologyService.ReadTopologyFromJson(path));
         }
 
@@ -38,11 +36,10 @@ namespace MasterMicro.Task.Topology.Test
         {
 
             var fileName = "topology.json";
-            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
-            var path = parentDir + "\\" + fileName;
-            var top=await _topologyService.ReadTopologyFromJson(path);
-            var topToWrite = await _topologyService.SaveTopologyToJson(top.Id);
-            Assert.NotNull(topToWrite);
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            var top =await _topologyService.ReadTopologyFromJson(path);
+            var savedFile = await _topologyService.SaveTopologyToJson(top.Id);
+            Assert.True(File.Exists(savedFile));
         }
 
         [Fact]
@@ -50,8 +47,7 @@ namespace MasterMicro.Task.Topology.Test
         {
 
             var fileName = "topology.json";
-            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
-            var path = parentDir + "\\" + fileName;
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             var top1 = await _topologyService.ReadTopologyFromJson(path);
             var devices = _topologyService.GetDevices(top1.Id);
             Assert.NotNull(devices);
@@ -63,8 +59,7 @@ namespace MasterMicro.Task.Topology.Test
         {
 
             var fileName = "topology.json";
-            var parentDir = Directory.GetParent(Environment.CurrentDirectory).FullName.Replace(@"\bin\Debug", "");
-            var path = parentDir + "\\" + fileName;
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             var top1 = await _topologyService.ReadTopologyFromJson(path);
             var device = _topologyService.GetDevices(top1.Id, top1.Components?.Select(x => x.Netlist?.Id).FirstOrDefault());
             Assert.NotNull(device);
